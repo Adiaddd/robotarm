@@ -9,18 +9,26 @@ void setup() {
   //motors setupfor 1 servo
   setupMotors(3);
   delay(500);
-  HelpCommand();
+  // HelpCommand();
   pinMode(A0, INPUT);
+  Serial.println("hello");
 }
+
+//testing testing
+
 
 
 void loop() 
 {
   //Serial.print("Hello");
-  String command = ReadSerialLine();
-  //Serial.println(analogRead(A0)); //0 is 104-103 and 180 is 663 or so. 
-  if(command.length() > 0)
-  {
-    StringParse(command);
-  }
+  // String command = ReadSerialLine();
+
+  // //Serial.println(analogRead(A0)); //0 is 104-103 and 180 is 663 or so. 
+  // if(command.length() > 0)
+  // {
+  //   StringParse(command);
+  // }
+
+  
+
 }

@@ -36,6 +36,17 @@ void DispatchCommand(String command, String others)
         ServoSetAngle(others);
         return;
     }
+    else if (command == "SERVOS")
+    {
+        ServosSetAngles(others);
+        return;
+    }
+    else if (command == "SPATH")
+    {
+
+        ServosSetPath(others);
+        return;
+    }
     else if(command == "HELP")
     {
         HelpCommand();
@@ -67,24 +78,32 @@ void StringParse(String line)
     line.toUpperCase();
 
     int spaceIndex = -1;
+    Serial.println("This is the line: ");
+    Serial.println(line);
     for(int i = 0; i < line.length(); i++)
     {
         if(line[i] == ' ')
         {
             spaceIndex = i;
+            Serial.println("space index" );
+            Serial.print(spaceIndex);
             break;
         }
     }
     if(spaceIndex != -1) //for cases where there are no given perameters. Only putting here for convenience, few functions with no params. 
     {
         String command = line.substring(0, spaceIndex);
+        Serial.println(command);
         String others = line.substring(spaceIndex + 1);
+        Serial.println(others);
 
         DispatchCommand(command, others);
     }
     return;
     
 }
+
+
 String ReadSerialLine()
 {
     static String command = "";

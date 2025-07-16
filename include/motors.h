@@ -52,30 +52,12 @@ void setupMotors(int servoAmount)
 }
 
 //later on I want to improve this function by taking in an angle from the rotary encoder and using it to find how to time to slow down speed. 
-bool ServosSetAngles(String args)
+bool ServosSetAngles(int args[])
 {
-  args.trim();
 
-  // Split args into three space-separated parts
-  int space1 = args.indexOf(' ');
-  if (space1 == -1) {
-    Serial.println("Not enough arguments.");
-    return false;
-  }
-
-  int space2 = args.indexOf(' ', space1 + 1);
-  if (space2 == -1) {
-    Serial.println("Not enough arguments.");
-    return false;
-  }
-
-  String angle1Str = args.substring(0, space1);
-  String angle2Str = args.substring(space1 + 1, space2);
-  String angle3Str = args.substring(space2 + 1);
-
-  float angle1 = angle1Str.toFloat();
-  float angle2 = angle2Str.toFloat();
-  float angle3 = angle3Str.toFloat();
+  int angle1 = args[0];
+  int angle2 = args[1];
+  int angle3 = args[2];
 
   Serial.println("Setting servos to angles: " + String(angle1) + ", " + String(angle2) + ", " + String(angle3));
 
@@ -91,41 +73,41 @@ bool ServosSetAngles(String args)
   return true;
 }
 
-bool ServosSetPath(String args)
-{
-  args.trim();
-  Serial.println("Received path:");
-  Serial.println(args);
+// bool ServosSetPath(String args)
+// {
+//   args.trim();
+//   Serial.println("Received path:");
+//   Serial.println(args);
 
-  while (args.length() > 0) {
-    int spacer1 = args.indexOf(' ');
-    if (spacer1 == -1) return false;
+//   while (args.length() > 0) {
+//     int spacer1 = args.indexOf(' ');
+//     if (spacer1 == -1) return false;
 
-    int spacer2 = args.indexOf(' ', spacer1 + 1);
-    if (spacer2 == -1) return false;
+//     int spacer2 = args.indexOf(' ', spacer1 + 1);
+//     if (spacer2 == -1) return false;
 
-    int spacer3 = args.indexOf(' ', spacer2 + 1);
+//     int spacer3 = args.indexOf(' ', spacer2 + 1);
 
-    String firstString;
-    if (spacer3 == -1) {
-      // Last group of 3, take the rest of the string
-      firstString = args;
-      args = "";
-    } else {
-      firstString = args.substring(0, spacer3);
-      args = args.substring(spacer3 + 1);
-    }
+//     String firstString;
+//     if (spacer3 == -1) {
+//       // Last group of 3, take the rest of the string
+//       firstString = args;
+//       args = "";
+//     } else {
+//       firstString = args.substring(0, spacer3);
+//       args = args.substring(spacer3 + 1);
+//     }
 
-    firstString.trim();
-    Serial.print("Setting angles: ");
-    Serial.println(firstString);
-    ServosSetAngles(firstString);
-    delay(250); // optional delay between movements
-  }
+//     firstString.trim();
+//     Serial.print("Setting angles: ");
+//     Serial.println(firstString);
+//     ServosSetAngles(firstString);
+//     delay(250); // optional delay between movements
+//   }
 
-  Serial.println("Path complete");
-  return true;
-}
+//   Serial.println("Path complete");
+//   return true;
+// }
 
 bool ServoSetAngle(String args)
 {
